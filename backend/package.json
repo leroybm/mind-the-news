@@ -1,0 +1,23 @@
+{
+  "name": "mind-the-news-backend",
+  "version": "0.0.1",
+  "description": "Test for mind the graph - backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -e js -x node src/index.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+  },
+  "author": "Leroy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4"
+  }
+}
