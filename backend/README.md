@@ -10,28 +10,28 @@ As the news are usually, well.. new, this API will not use a DB.
 
 ## Todo / Nice to haves
 
-  * Tests
-    * I've tried using Jest, but the time constraint and my lack of knowledge of pupeteer made this be backlog
-  * GraphQL 
-    * It would make more sense to return just what the user requested, as this will be a dynamic service
-  * Cache
+- Tests
+  - I've tried using Jest, but the time constraint and my lack of knowledge of pupeteer made this be backlog
+- GraphQL
+  - It would make more sense to return just what the user requested, as this will be a dynamic service
+- Cache
 
 ## Instructions
 
 ### Dev
 
 ```
-npm run dev
+yarn dev
 ```
 
 ### Lint
 
 ```
-npm run lint
+yarn lint
 ```
 
 To automatically fix stuff
 
 ```
-npm run lint:fix
+yarn lint:fix
 ```

@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
+import EditSource from './EditSource'
 
+// TODO: PropTypes
 class Sources extends Component {
+  state = {
+    showEdit: false,
+  }
+
+  // TODO: Make this dinamic and move to an utils file
   fetchNews = async () => {
     const data = JSON.stringify({
       siteUrl: 'https://www.sciencenews.org/topic/life',
@@ -27,7 +34,23 @@ class Sources extends Component {
   }
 
   render() {
-    return <button onClick={this.fetchNews}>Load News</button>
+    return (
+      <div className="card">
+        <p>Current source url: {this.props.source.siteUrl}</p>
+        <button
+          onClick={() => this.setState({ showEdit: !this.state.showEdit })}
+        >
+          Edit News Source
+        </button>
+        <button onClick={this.fetchNews}>Load News</button>
+        {this.state.showEdit && (
+          <EditSource
+            setSource={this.props.setSource}
+            source={this.props.source}
+          />
+        )}
+      </div>
+    )
   }
 }
 

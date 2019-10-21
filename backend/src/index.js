@@ -14,11 +14,9 @@ app.post('/news', async (req, res) => {
     const news = await scrapNews(req.body)
     res.send(news)
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        error
-      })
+    res.status(500).send({
+      error,
+    })
   }
 })
 

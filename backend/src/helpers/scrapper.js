@@ -9,7 +9,7 @@ const CONTENT_BY_NODE_TYPE = {
   url: 'href',
   title: 'innerText',
   body: 'innerText',
-  image: 'src'
+  image: 'src',
 }
 
 async function getPage(url) {
@@ -19,35 +19,45 @@ async function getPage(url) {
   return page
 }
 
+// TODO Refactor
+// TODO Multiple elements
 async function scrapeElements(page, selectors, parent = '') {
-  return selectors
-    .map(async (newsSelector) => {
-      const result = {}
-      for (const [nodeType, selector] of Object.entries(newsSelector)) {
-        if (selector) {
-          try {
-            await page.waitForSelector(`${parent} ${selector}`, { timeout: TIMEOUT })
-            result[nodeType] = await page.evaluate(({ selector, acessor }) => {
+  return selectors.map(async newsSelector => {
+    const result = {}
+    for (const [nodeType, selector] of Object.entries(newsSelector)) {
+      if (selector) {
+        try {
+          await page.waitForSelector(`${parent} ${selector}`, {
+            timeout: TIMEOUT,
+          })
+          result[nodeType] = await page.evaluate(
+            ({ selector, acessor }) => {
               const element = document.querySelector(selector)
               return element && element[acessor]
-            }, { selector, acessor: CONTENT_BY_NODE_TYPE[nodeType] })
-          } catch (error) {
-            console.error(error)
-            return
-          }
+            },
+            { selector, acessor: CONTENT_BY_NODE_TYPE[nodeType] },
+          )
+        } catch (error) {
+          console.error(error)
+          return
         }
       }
-      return result
-    })
+    }
+    return result
+  })
 }
 
 async function scrapNews(options) {
   const page = await getPage(options.siteUrl)
-  const scrappers = await scrapeElements(page, options.selectors, options.parentSelector)
+  const scrappers = await scrapeElements(
+    page,
+    options.selectors,
+    options.parentSelector,
+  )
   const result = await Promise.all(scrappers)
   return result.filter(Boolean)
 }
 
 module.exports = {
-  scrapNews
+  scrapNews,
 }
