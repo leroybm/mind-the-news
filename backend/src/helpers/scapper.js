@@ -1,26 +1,50 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer')
 
-async function getHeadlines() {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://www.sciencenews.org/');
+/**
+ * Acessor type for each HTML element
+ */
+const CONTENT_BY_NODE_TYPE = {
+  url: 'href',
+  title: 'innerText',
+  body: 'innerText',
+  image: 'src'
+}
 
-  // Wait for the results page to load and display the results.
-  const resultsSelector = '.site-main [class^=\'featured-primary-three-column__title\'] a';
-  await page.waitForSelector(resultsSelector);
+async function getPage(url) {
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+  await page.goto(url)
+  return page
+}
 
-  // Extract the results from the page.
-  const links = await page.evaluate((newsSelector) => {
-    const anchors = Array.from(document.querySelectorAll(newsSelector));
-    return anchors.map((anchor) => {
-      const title = anchor.textContent.split('|')[0].trim();
-      return `${title} - ${anchor.href}`;
-    });
-  }, resultsSelector);
+async function scrapeElements(page, selectors, parent = '') {
+  return selectors
+    .map(async (newsSelector) => {
+      const result = {}
+      for (const [nodeType, selector] of Object.entries(newsSelector)) {
+        if (selector) {
+          try {
+            await page.waitForSelector(`${parent} ${selector}`, { timeout: 5000 })
+            result[nodeType] = await page.evaluate(({ selector, acessor }) => {
+              const element = document.querySelector(selector)
+              return element && element[acessor]
+            }, { selector, acessor: CONTENT_BY_NODE_TYPE[nodeType] })
+          } catch (error) {
+            return
+          }
+        }
+      }
+      return result
+    })
+}
 
-  return links.join('\n');
+async function scrapNews(options) {
+  const page = await getPage(options.siteUrl)
+  const scrappers = await scrapeElements(page, options.selectors, options.parentSelector)
+  const result = await Promise.all(scrappers)
+  return result.filter(Boolean)
 }
 
 module.exports = {
-  getHeadlines
+  scrapNews
 }

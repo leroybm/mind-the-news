@@ -1,12 +1,22 @@
-const express = require('express');
+const express = require('express')
+const { scrapNews } = require('./helpers/scapper')
 
-const app = express();
-const port = 3000;
+const app = express()
+const port = 3000
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.use(express.json())
+
 app.get('/news', async (req, res) => {
+  try {
+    const news = await scrapNews(req.body)
+    res.send(news)
+  } catch (error) {
+    res
+      .status(500)
+      .send({
+        error
+      })
+  }
+})
 
-  res.send('Fim');
-});
-
-app.listen(port, () => console.log(`Server open on ${port}!`));
+app.listen(port, () => console.log(`Server open on ${port}!`))
