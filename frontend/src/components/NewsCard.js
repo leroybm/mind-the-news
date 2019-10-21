@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import NewsImage from './NewsImage';
+import React from 'react'
+import PropTypes from 'prop-types'
+import NewsImage from './NewsImage'
 
 const NewsCard = props => {
   return (
@@ -13,14 +13,14 @@ const NewsCard = props => {
         </div>
       </a>
     </article>
-  );
-};
+  )
+}
 
 NewsCard.propTypes = {
   url: PropTypes.string.isRequired,
   image: PropTypes.string,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
 }
 
-export default NewsCard;
+export default NewsCard

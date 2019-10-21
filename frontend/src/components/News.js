@@ -18,11 +18,11 @@ const News = props => {
         )
       })}
     </ul>
-  );
-};
-
-News.propTypes = {
-  news: PropTypes.array.isRequired
+  )
 }
 
-export default News;
+News.propTypes = {
+  news: PropTypes.array.isRequired,
+}
+
+export default News

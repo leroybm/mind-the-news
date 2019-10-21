@@ -1,20 +1,20 @@
 :root {
   /* Variables */
-  --white: #FEFFFF;
-  --off-white: ##F7FDFD;
-  --main: #3AAFA9;
-  --off-black: #2B7A79;
-  --black: #17252A;
+  --white: #feffff;
+  --off-white: ##f7fdfd;
+  --main: #3aafa9;
+  --off-black: #2b7a79;
+  --black: #17252a;
 
   --normal: 400;
   --bold: 700;
 
-  --default-transition: .5s;
+  --default-transition: 0.5s;
 
   /* Defaults */
   font-size: 12px;
   font-family: 'Open Sans', sans-serif;
-  color: var(--black)
+  color: var(--black);
 }
 
 /* Theme */
@@ -62,7 +62,7 @@ a:hover {
   margin-bottom: 2rem;
   padding: 1.5rem 2rem;
   border-left: 5px solid var(--main);
-  box-shadow: 3px 3px 8px 0px rgba(23,37,42,0.2);
+  box-shadow: 3px 3px 8px 0px rgba(23, 37, 42, 0.2);
 }
 
 /* News Component */
@@ -79,9 +79,10 @@ a:hover {
 }
 
 .news-card:hover {
-  --hover-amount: -.25rem;
+  --hover-amount: -0.25rem;
   transform: translate(var(--hover-amount), var(--hover-amount));
-  box-shadow: calc(3px - var(--hover-amount)) calc(3px - var(--hover-amount)) calc(8px - var(--hover-amount)) 0px rgba(23,37,42,0.2);
+  box-shadow: calc(3px - var(--hover-amount)) calc(3px - var(--hover-amount))
+    calc(8px - var(--hover-amount)) 0px rgba(23, 37, 42, 0.2);
 }
 
 .news-card figure {
@@ -114,7 +115,7 @@ a:hover {
 
 @media screen and (max-width: 900px) {
   body {
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   .news {

@@ -1,39 +1,19 @@
-import React, { Component } from 'react';
-import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import React, { Component } from 'react'
+import './App.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import News from './components/News'
-
-const sampleNews = [
-  {
-    url: 'leroybm',
-    title: 'Leroy',
-    image: 'https://placehold.it/300x300',
-    description: 'test news'
-  },
-  {
-    url: 'leroybm',
-    title: 'Leroy',
-    image: 'https://placehold.it/300x300',
-    description: 'test news'
-  },
-  {
-    url: 'leroybm',
-    title: 'Leroy',
-    image: 'https://placehold.it/300x300',
-    description: 'test news'
-  },
-  {
-    url: 'leroybm',
-    title: 'Leroy',
-    image: 'https://placehold.it/300x300',
-    description: 'test news'
-  }
-]
+import Sources from './components/Sources'
 
 class App extends Component {
   state = {
-    news: sampleNews
+    news: [],
+  }
+
+  updateNews = news => {
+    this.setState({
+      news,
+    })
   }
 
   render() {
@@ -41,12 +21,13 @@ class App extends Component {
       <div className="app">
         <Header />
         <main>
+          <Sources updateNews={this.updateNews} />
           <News news={this.state.news} />
         </main>
         <Footer />
       </div>
     )
-  };
+  }
 }
 
-export default App;
+export default App

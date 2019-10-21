@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer')
 
+const TIMEOUT = 10 * 1000
+
 /**
  * Acessor type for each HTML element
  */
@@ -24,12 +26,13 @@ async function scrapeElements(page, selectors, parent = '') {
       for (const [nodeType, selector] of Object.entries(newsSelector)) {
         if (selector) {
           try {
-            await page.waitForSelector(`${parent} ${selector}`, { timeout: 5000 })
+            await page.waitForSelector(`${parent} ${selector}`, { timeout: TIMEOUT })
             result[nodeType] = await page.evaluate(({ selector, acessor }) => {
               const element = document.querySelector(selector)
               return element && element[acessor]
             }, { selector, acessor: CONTENT_BY_NODE_TYPE[nodeType] })
           } catch (error) {
+            console.error(error)
             return
           }
         }
