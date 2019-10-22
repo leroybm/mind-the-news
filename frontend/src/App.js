@@ -44,7 +44,7 @@ class App extends Component {
             setSource={this.setSource}
             source={this.state.source}
           />
-          <News news={this.state.news} />
+          {!!this.state.news.length && <News news={this.state.news} />}
         </main>
         <Footer />
       </div>

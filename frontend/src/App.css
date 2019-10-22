@@ -33,6 +33,11 @@ header {
 
 h1 {
   font-size: 2.5rem;
+  font-weight: var(--bold);
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 footer {
@@ -69,12 +74,15 @@ a:hover {
 .news {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 2rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* News Card Component */
 .news-card {
+  height: 100%;
   padding: 0;
+  margin-bottom: 0;
   transition: all var(--default-transition);
 }
 
@@ -85,13 +93,8 @@ a:hover {
     calc(8px - var(--hover-amount)) 0px rgba(23, 37, 42, 0.2);
 }
 
-.news-card figure {
-  max-height: 200px;
-  max-width: 200px;
-}
-
 .news-card img {
-  height: 100%;
+  width: 100%;
 }
 
 .news-card div {
@@ -101,16 +104,14 @@ a:hover {
 .news-card h3 {
   margin-bottom: 2rem;
   font-size: 2rem;
+  font-weight: var(--bold);
   color: var(--black);
 }
 
 .news-card p {
   font-size: 1.25rem;
+  font-weight: var(--normal);
   color: var(--black);
-}
-
-.news-card a {
-  display: flex;
 }
 
 @media screen and (max-width: 900px) {
