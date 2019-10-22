@@ -1,3 +1,8 @@
+const endpoint =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : 'https://mind-the-news-backend.herokuapp.com'
+
 /**
  * Fetches the news from the API
  *
@@ -31,7 +36,7 @@ const fetchNews = async ({
     ],
   })
 
-  const newsSource = await fetch('//localhost:4000/news', {
+  const newsSource = await fetch(`${endpoint}/news`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
