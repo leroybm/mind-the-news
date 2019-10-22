@@ -17,7 +17,7 @@ class EditSource extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="card edit-source-card" onSubmit={this.handleSubmit}>
         <fieldset>
           <label htmlFor="siteUrl">
             Site Url

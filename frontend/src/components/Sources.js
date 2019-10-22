@@ -11,6 +11,7 @@ class Sources extends Component {
   // TODO: Make this dinamic and move to an utils file
   fetchNews = async () => {
     nprogress.start()
+    this.props.updateNews({})
     const data = JSON.stringify({
       siteUrl: 'https://www.sciencenews.org/topic/life',
       parentSelector: '.site-main',
@@ -39,21 +40,31 @@ class Sources extends Component {
 
   render() {
     return (
-      <div className="card">
-        <p>Current source url: {this.props.source.siteUrl}</p>
-        <button
-          onClick={() => this.setState({ showEdit: !this.state.showEdit })}
-        >
-          Edit News Source
-        </button>
-        <button onClick={this.fetchNews}>Load News</button>
+      <>
+        <div className="card sources-card">
+          <p>
+            Current source url
+            <br />
+            <strong>{this.props.source.siteUrl}</strong>
+          </p>
+          <div className="buttons">
+            <button
+              onClick={() => this.setState({ showEdit: !this.state.showEdit })}
+            >
+              Edit News Source
+            </button>
+            <button className="primary" onClick={this.fetchNews}>
+              Load News
+            </button>
+          </div>
+        </div>
         {this.state.showEdit && (
           <EditSource
             setSource={this.props.setSource}
             source={this.props.source}
           />
         )}
-      </div>
+      </>
     )
   }
 }
