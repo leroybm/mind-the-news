@@ -92,8 +92,8 @@ async function scrapNews(options) {
     options.parentSelector,
     scrapeElements,
   )
-  browser.close()
   const [result] = await Promise.all(scrappers)
+  browser.close()
   return result.filter(Boolean)
 }
 
