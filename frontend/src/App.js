@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import nprogress from 'nprogress'
+import { fetchNews } from './utils/news'
 import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import News from './components/News'
 import Sources from './components/Sources'
 
-// TODO: Docs
 class App extends Component {
   state = {
     news: [],
@@ -19,10 +20,20 @@ class App extends Component {
     },
   }
 
-  updateNews = news => {
+  updateNews = async () => {
+    nprogress.start()
+
+    this.setState({
+      news: {},
+    })
+
+    const news = await fetchNews(this.state.source)
+
     this.setState({
       news,
     })
+
+    nprogress.done()
   }
 
   setSource = source => {

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-// TODO: PropTypes
 class EditSource extends Component {
+  static propTypes = {
+    setSource: PropTypes.func.isRequired,
+    source: PropTypes.object.isRequired,
+  }
+
   state = {}
 
   handleChange = event => {

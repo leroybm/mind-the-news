@@ -1,41 +1,16 @@
 import React, { Component } from 'react'
-import nprogress from 'nprogress'
+import PropTypes from 'prop-types'
 import EditSource from './EditSource'
 
-// TODO: PropTypes
 class Sources extends Component {
-  state = {
-    showEdit: false,
+  static propTypes = {
+    setSource: PropTypes.func.isRequired,
+    updateNews: PropTypes.func.isRequired,
+    source: PropTypes.object.isRequired,
   }
 
-  // TODO: Make this dinamic and move to an utils file
-  fetchNews = async () => {
-    nprogress.start()
-    this.props.updateNews({})
-    const data = JSON.stringify({
-      siteUrl: 'https://www.sciencenews.org/topic/life',
-      parentSelector: '.site-main',
-      selectors: [
-        {
-          url: "h3[class^='post-item-river__title'] a",
-          title: "h3[class^='post-item-river__title'] a",
-          body: "p[class^='post-item-river__excerpt']",
-          image: "a[class^='post-item-river__thumbnail'] img",
-        },
-      ],
-    })
-
-    const newsSource = await fetch('//localhost:4000/news', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: data,
-    })
-    nprogress.set(0.8)
-    const response = await newsSource.json()
-    this.props.updateNews(response)
-    nprogress.done()
+  state = {
+    showEdit: false,
   }
 
   setSource = newSource => {
@@ -61,7 +36,7 @@ class Sources extends Component {
             >
               Edit News Source
             </button>
-            <button className="primary" onClick={this.fetchNews}>
+            <button className="primary" onClick={this.props.updateNews}>
               Load News
             </button>
           </div>
