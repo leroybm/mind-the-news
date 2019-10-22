@@ -21,7 +21,7 @@ As the news are usually, well.. new, this API will not use a DB.
 ### Dev
 
 ```
-yarn start
+yarn dev
 ```
 
 ### Lint
@@ -34,4 +34,10 @@ To automatically fix stuff
 
 ```
 yarn lint:fix
+```
+
+### Deploy
+
+```
+git subtree push --prefix backend heroku-backend master
 ```
