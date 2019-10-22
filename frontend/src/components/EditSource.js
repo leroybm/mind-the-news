@@ -23,87 +23,85 @@ class EditSource extends Component {
   render() {
     return (
       <form className="card edit-source-card" onSubmit={this.handleSubmit}>
-        <fieldset>
-          <label htmlFor="siteUrl">
-            Site Url
-            <input
-              type="text"
-              name="siteUrl"
-              id="siteUrl"
-              placeholder="siteUrl"
-              required
-              defaultValue={this.props.source.siteUrl}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="siteUrl">
+          Site Url
+          <input
+            type="text"
+            name="siteUrl"
+            id="siteUrl"
+            placeholder="siteUrl"
+            required
+            defaultValue={this.props.source.siteUrl}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <label htmlFor="parentSelector">
-            Parent Selector
-            <input
-              type="text"
-              name="parentSelector"
-              id="parentSelector"
-              placeholder="parentSelector"
-              required
-              defaultValue={this.props.source.parentSelector}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="parentSelector">
+          Parent Selector
+          <input
+            type="text"
+            name="parentSelector"
+            id="parentSelector"
+            placeholder="parentSelector"
+            required
+            defaultValue={this.props.source.parentSelector}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <label htmlFor="url">
-            Url Selector
-            <input
-              type="text"
-              name="url"
-              id="url"
-              placeholder="url"
-              required
-              defaultValue={this.props.source.url}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="url">
+          Url Selector
+          <input
+            type="text"
+            name="url"
+            id="url"
+            placeholder="url"
+            required
+            defaultValue={this.props.source.url}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <label htmlFor="title">
-            Title Selector
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="title"
-              required
-              defaultValue={this.props.source.title}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="title">
+          Title Selector
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="title"
+            required
+            defaultValue={this.props.source.title}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <label htmlFor="body">
-            Body Selector
-            <input
-              type="text"
-              name="body"
-              id="body"
-              placeholder="body"
-              required
-              defaultValue={this.props.source.body}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="body">
+          Body Selector
+          <input
+            type="text"
+            name="body"
+            id="body"
+            placeholder="body"
+            required
+            defaultValue={this.props.source.body}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <label htmlFor="image">
-            Image Selector
-            <input
-              type="text"
-              name="image"
-              id="image"
-              placeholder="image"
-              required
-              defaultValue={this.props.source.image}
-              onChange={this.handleChange}
-            />
-          </label>
+        <label htmlFor="image">
+          Image Selector
+          <input
+            type="text"
+            name="image"
+            id="image"
+            placeholder="image"
+            required
+            defaultValue={this.props.source.image}
+            onChange={this.handleChange}
+          />
+        </label>
 
-          <button>Edit Source</button>
-        </fieldset>
+        <button>Edit Source</button>
       </form>
     )
   }

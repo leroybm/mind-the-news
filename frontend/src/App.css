@@ -160,8 +160,7 @@ button:hover {
 
 /* Edit Source Card */
 
-.edit-source-card fieldset {
-  border: none;
+.edit-source-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 2rem;

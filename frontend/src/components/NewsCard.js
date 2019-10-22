@@ -5,7 +5,7 @@ import NewsImage from './NewsImage'
 const NewsCard = props => {
   return (
     <article className="card news-card">
-      <a href={props.url} target="_blank" rel="nofollow">
+      <a href={props.url} target="_blank" rel="noopener nofollow">
         <NewsImage src={props.image} />
         <div>
           <h3>{props.title}</h3>
