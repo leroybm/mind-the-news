@@ -9,7 +9,7 @@ const CONTENT_BY_NODE_TYPE = {
   url: 'href',
   title: 'innerText',
   body: 'innerText',
-  image: 'src'
+  image: 'src',
 }
 
 /**
@@ -17,8 +17,10 @@ const CONTENT_BY_NODE_TYPE = {
  *
  * @param {String} url
  */
-async function getPage (url) {
-  const browser = await puppeteer.launch()
+async function getPage(url) {
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  })
   const page = await browser.newPage()
   await page.goto(url)
   return page
@@ -30,7 +32,7 @@ async function getPage (url) {
  *
  * @param {Object} faucetFromPupetter
  */
-function scrapeElements (faucetFromPupetter) {
+function scrapeElements(faucetFromPupetter) {
   const { newsSelector, CONTENT_BY_NODE_TYPE } = faucetFromPupetter
   const scrappedContent = []
 
@@ -55,20 +57,20 @@ function scrapeElements (faucetFromPupetter) {
  * @param {String} parent
  * @param {Function} script
  */
-async function executeScriptOnPage (
+async function executeScriptOnPage(
   page,
   selectors,
   parent = 'body',
-  script = scrapeElements
+  script = scrapeElements,
 ) {
   return selectors.map(async newsSelector => {
     try {
       await page.waitForSelector(parent, {
-        timeout: TIMEOUT
+        timeout: TIMEOUT,
       })
       return await page.evaluate(script, {
         newsSelector,
-        CONTENT_BY_NODE_TYPE
+        CONTENT_BY_NODE_TYPE,
       })
     } catch (error) {
       console.error(error)
@@ -82,18 +84,18 @@ async function executeScriptOnPage (
  * @param {String} options.siteUrl
  * @param {Object[]} options.selectors
  */
-async function scrapNews (options) {
+async function scrapNews(options) {
   const page = await getPage(options.siteUrl)
   const scrappers = await executeScriptOnPage(
     page,
     options.selectors,
     options.parentSelector,
-    scrapeElements
+    scrapeElements,
   )
   const [result] = await Promise.all(scrappers)
   return result.filter(Boolean)
 }
 
 module.exports = {
-  scrapNews
+  scrapNews,
 }
