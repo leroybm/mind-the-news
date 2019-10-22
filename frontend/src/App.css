@@ -1,0 +1,124 @@
+:root {
+  /* Variables */
+  --white: #feffff;
+  --off-white: ##f7fdfd;
+  --main: #3aafa9;
+  --off-black: #2b7a79;
+  --black: #17252a;
+
+  --normal: 400;
+  --bold: 700;
+
+  --default-transition: 0.5s;
+
+  /* Defaults */
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--black);
+}
+
+/* Theme */
+
+::selection {
+  background: var(--main);
+}
+
+body {
+  background: var(--off-white);
+}
+
+header {
+  margin-top: 4rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+footer {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--main);
+  font-weight: var(--bold);
+  text-decoration: none;
+  transition: color var(--default-transition);
+}
+
+a:hover {
+  color: var(--off-black);
+}
+
+/* Generic Components */
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--white);
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+  border-left: 5px solid var(--main);
+  box-shadow: 3px 3px 8px 0px rgba(23, 37, 42, 0.2);
+}
+
+/* News Component */
+.news {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+}
+
+/* News Card Component */
+.news-card {
+  padding: 0;
+  transition: all var(--default-transition);
+}
+
+.news-card:hover {
+  --hover-amount: -0.25rem;
+  transform: translate(var(--hover-amount), var(--hover-amount));
+  box-shadow: calc(3px - var(--hover-amount)) calc(3px - var(--hover-amount))
+    calc(8px - var(--hover-amount)) 0px rgba(23, 37, 42, 0.2);
+}
+
+.news-card figure {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.news-card img {
+  height: 100%;
+}
+
+.news-card div {
+  padding: 2rem;
+}
+
+.news-card h3 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.news-card p {
+  font-size: 1.25rem;
+  color: var(--black);
+}
+
+.news-card a {
+  display: flex;
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .news {
+    grid-template-columns: 1fr;
+  }
+}
