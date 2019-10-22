@@ -12,7 +12,7 @@ const News = props => {
               url={news.url}
               image={news.image}
               title={news.title}
-              description={news.description}
+              body={news.body}
             />
           </li>
         )

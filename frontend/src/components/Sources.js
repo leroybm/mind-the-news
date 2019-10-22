@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import nprogress from 'nprogress'
 import EditSource from './EditSource'
 
 // TODO: PropTypes
@@ -9,6 +10,7 @@ class Sources extends Component {
 
   // TODO: Make this dinamic and move to an utils file
   fetchNews = async () => {
+    nprogress.start()
     const data = JSON.stringify({
       siteUrl: 'https://www.sciencenews.org/topic/life',
       parentSelector: '.site-main',
@@ -29,8 +31,10 @@ class Sources extends Component {
       },
       body: data,
     })
+    nprogress.set(0.8)
     const response = await newsSource.json()
     this.props.updateNews(response)
+    nprogress.done()
   }
 
   render() {

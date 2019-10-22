@@ -21,7 +21,7 @@ As the news are usually, well.. new, this API will not use a DB.
 ### Dev
 
 ```
-yarn dev
+yarn start
 ```
 
 ### Lint

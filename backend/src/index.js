@@ -15,7 +15,7 @@ app.post('/news', async (req, res) => {
     res.send(news)
   } catch (error) {
     res.status(500).send({
-      error,
+      error
     })
   }
 })

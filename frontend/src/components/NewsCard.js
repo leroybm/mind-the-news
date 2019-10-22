@@ -9,7 +9,7 @@ const NewsCard = props => {
         <NewsImage src={props.image} />
         <div>
           <h3>{props.title}</h3>
-          <p>{props.description}</p>
+          <p>{props.body}</p>
         </div>
       </a>
     </article>
@@ -20,7 +20,7 @@ NewsCard.propTypes = {
   url: PropTypes.string.isRequired,
   image: PropTypes.string,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  body: PropTypes.string,
 }
 
 export default NewsCard

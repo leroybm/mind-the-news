@@ -4,7 +4,7 @@
   "description": "Test for mind the graph - backend",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -e js -x node src/index.js",
+    "start": "nodemon -e js -x node src/index.js",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
   },
