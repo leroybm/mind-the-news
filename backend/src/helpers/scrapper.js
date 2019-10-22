@@ -12,6 +12,11 @@ const CONTENT_BY_NODE_TYPE = {
   image: 'src',
 }
 
+/**
+ * Gets a running instance of pupeteer's chromium at given url
+ *
+ * @param {String} url
+ */
 async function getPage(url) {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -19,42 +24,74 @@ async function getPage(url) {
   return page
 }
 
-// TODO Refactor
-// TODO Multiple elements
-async function scrapeElements(page, selectors, parent = '') {
-  return selectors.map(async newsSelector => {
-    const result = {}
-    for (const [nodeType, selector] of Object.entries(newsSelector)) {
-      if (selector) {
-        try {
-          await page.waitForSelector(`${parent} ${selector}`, {
-            timeout: TIMEOUT,
-          })
-          result[nodeType] = await page.evaluate(
-            ({ selector, acessor }) => {
-              const element = document.querySelector(selector)
-              return element && element[acessor]
-            },
-            { selector, acessor: CONTENT_BY_NODE_TYPE[nodeType] },
-          )
-        } catch (error) {
-          console.error(error)
-          return
-        }
-      }
+/**
+ * Function that executes inside the browser to scrap the elemennts
+ * Must be pure
+ *
+ * @param {Object} faucetFromPupetter
+ */
+function scrapeElements(faucetFromPupetter) {
+  const { newsSelector, CONTENT_BY_NODE_TYPE } = faucetFromPupetter
+  const scrappedContent = []
+
+  Object.entries(newsSelector).map(([type, selector]) => {
+    const elements = document.querySelectorAll(selector)
+    if (elements) {
+      Array.from(elements).forEach((element, index) => {
+        scrappedContent[index] = scrappedContent[index] || {}
+        scrappedContent[index][type] = element[CONTENT_BY_NODE_TYPE[type]]
+      })
     }
-    return result
+  })
+
+  return scrappedContent
+}
+
+/**
+ * Execute script on page as soon as parent selector is available
+ *
+ * @param {Page} page
+ * @param {Object[]} selectors
+ * @param {String} parent
+ * @param {Function} script
+ */
+async function executeScriptOnPage(
+  page,
+  selectors,
+  parent = 'body',
+  script = scrapeElements,
+) {
+  return selectors.map(async newsSelector => {
+    try {
+      await page.waitForSelector(parent, {
+        timeout: TIMEOUT,
+      })
+      return await page.evaluate(script, {
+        newsSelector,
+        CONTENT_BY_NODE_TYPE,
+      })
+    } catch (error) {
+      console.error(error)
+      return
+    }
   })
 }
 
+/**
+ *
+ * @param {Object} options
+ * @param {String} options.siteUrl
+ * @param {Object[]} options.selectors
+ */
 async function scrapNews(options) {
   const page = await getPage(options.siteUrl)
-  const scrappers = await scrapeElements(
+  const scrappers = await executeScriptOnPage(
     page,
     options.selectors,
     options.parentSelector,
+    scrapeElements,
   )
-  const result = await Promise.all(scrappers)
+  const [result] = await Promise.all(scrappers)
   return result.filter(Boolean)
 }
 
