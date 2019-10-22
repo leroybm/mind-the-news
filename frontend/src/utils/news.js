@@ -1,7 +1,6 @@
-const endpoint =
-  process.env.REACT_APP_ENV === 'production'
-    ? 'https://mind-the-news-backend.herokuapp.com'
-    : 'http://localhost:4000'
+const endpoint = /heroku/.test(window.location)
+  ? 'https://mind-the-news-backend.herokuapp.com'
+  : 'http://localhost:4000'
 
 /**
  * Fetches the news from the API
