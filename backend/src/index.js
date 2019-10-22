@@ -3,10 +3,12 @@ const cors = require('cors')
 const { scrapNews } = require('./helpers/scrapper')
 
 const app = express()
-const port = 4000
+const port = 3000
 
 app.use(express.json())
 app.use(cors())
+
+app.get('/', (req, res) => res.send('pong'))
 
 app.post('/news', async (req, res) => {
   try {
@@ -15,7 +17,7 @@ app.post('/news', async (req, res) => {
     res.send(news)
   } catch (error) {
     res.status(500).send({
-      error
+      error,
     })
   }
 })
