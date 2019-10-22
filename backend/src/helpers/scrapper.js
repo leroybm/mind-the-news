@@ -23,7 +23,7 @@ async function getPage(url) {
   })
   const page = await browser.newPage()
   await page.goto(url)
-  return page
+  return { page, browser }
 }
 
 /**
@@ -85,13 +85,14 @@ async function executeScriptOnPage(
  * @param {Object[]} options.selectors
  */
 async function scrapNews(options) {
-  const page = await getPage(options.siteUrl)
+  const { page, browser } = await getPage(options.siteUrl)
   const scrappers = await executeScriptOnPage(
     page,
     options.selectors,
     options.parentSelector,
     scrapeElements,
   )
+  browser.close()
   const [result] = await Promise.all(scrappers)
   return result.filter(Boolean)
 }
