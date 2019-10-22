@@ -38,6 +38,14 @@ class Sources extends Component {
     nprogress.done()
   }
 
+  setSource = newSource => {
+    this.setState({
+      showEdit: false,
+    })
+
+    this.props.setSource(newSource)
+  }
+
   render() {
     return (
       <>
@@ -59,10 +67,7 @@ class Sources extends Component {
           </div>
         </div>
         {this.state.showEdit && (
-          <EditSource
-            setSource={this.props.setSource}
-            source={this.props.source}
-          />
+          <EditSource setSource={this.setSource} source={this.props.source} />
         )}
       </>
     )
