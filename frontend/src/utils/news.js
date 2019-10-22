@@ -1,7 +1,7 @@
 const endpoint =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:4000'
-    : 'https://mind-the-news-backend.herokuapp.com'
+  process.env.REACT_APP_ENV === 'production'
+    ? 'https://mind-the-news-backend.herokuapp.com'
+    : 'http://localhost:4000'
 
 /**
  * Fetches the news from the API
